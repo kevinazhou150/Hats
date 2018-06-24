@@ -1,8 +1,6 @@
-//am currently working on this --Kaz
-//currently the code just goes into an infinite loop... fun times!
-
 package hats;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /* I will use the example of persons = 3, colors = 5 to make things simple.
  * My goal is to create 20 ordered triples such that there does not exist a pair of them that are "1 change apart",
@@ -54,7 +52,7 @@ public class LineOfSages {
 	/* main method
 	 * 
 	 */
-	public static void main (String[] args) {
+	public static void main (String[] args) throws InterruptedException {
 		int persons = 3;
 		int colors = 5;
 		
@@ -122,26 +120,31 @@ public class LineOfSages {
 			for(int i = 0; i < colors; i++) {
 				if(!visited.get(position).contains(i)) {
 					set.get(position).set(persons-1, i);
+					visited.get(position).add(i);
 					if(checkset(set, checker)) 
 						break;
 					else
-						set.get(position).set(persons-1, -i-1);
+						set.get(position).set(persons-1, -position-1);
 
-					visited.get(position).add(i);
+					
 				}
 				else if(i == colors - 1) { //backtrack!
 					while(visited.get(position).size() >= persons) {
 						visited.get(position).remove(persons-1);
 					}
 					position--;
-					set.get(position).set(persons-1, -i-1);
+					set.get(position).set(persons-1, -position-1);
 				}
 			}
-			System.out.println(set);
+			
+			/* 
+			System.out.println("set: " + set);
+			System.out.println("visited: " + visited + "\n");
+			TimeUnit.SECONDS.sleep(1);
+			*/
 		}
 		
-		
-		
+		System.out.println(set);
 		
 	}
 }
