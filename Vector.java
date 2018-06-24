@@ -1,4 +1,4 @@
-package bipartite;
+package line;
 
 public class Vector {
 	public int length;
