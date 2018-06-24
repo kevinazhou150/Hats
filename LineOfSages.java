@@ -1,4 +1,5 @@
 //am currently working on this --Kaz
+//currently the code just goes into an infinite loop... fun times!
 
 package hats;
 import java.util.ArrayList;
@@ -16,10 +17,11 @@ public class LineOfSages {
 	
 	public static void print2DArray (int[][] array) { //helper method that prints out a 2D array
 		for(int i = 0; i < array.length; i++) {
+			System.out.print("[");
 			for(int j = 0; j < array[i].length; j++) {
 				System.out.print(array[i][j] + " ");
 			}
-			System.out.println();
+			System.out.print("], ");
 		}
 	}
 	
@@ -44,7 +46,6 @@ public class LineOfSages {
 				else 
 					set1.add(tempset1);
 			}
-			System.out.println("Set formed by removing entry " + i + ": " + set1);
 		}
 
 		return true;
@@ -63,7 +64,7 @@ public class LineOfSages {
 		}
 		
 		ArrayList<ArrayList<Integer>> set = new ArrayList<ArrayList<Integer>>(); //The independent set of permutations that we want to find. 
-		int[][] visited = new int[cases][colors]; //Keeps track of the numbers we have tried to put into the independent set so far.
+		ArrayList<ArrayList<Integer>> visited = new ArrayList<ArrayList<Integer>>(); //Keeps track of the numbers we have tried to put into the independent set so far.
 		ArrayList<ArrayList<Integer>> checker = new ArrayList<ArrayList<Integer>>(); //all n-1 tuples such that all of the numbers in the n-1 tuples are distinct
 		
 		/* Adds P(colors, 4) permutations of (persons - 1) numbers,
@@ -91,10 +92,10 @@ public class LineOfSages {
 				ArrayList<Integer> tempset = new ArrayList<Integer>();
 				ArrayList<Integer> tempset2 = new ArrayList<Integer>();
 				for(int j = 0; j < number.length(); j++) {
-					visited[counter][j] = Character.getNumericValue(number.charAt(j));
 					tempset.add(Character.getNumericValue(number.charAt(j)));
 				}
 				checker.add(tempset);
+				visited.add(tempset);
 				for(int j = 0; j < tempset.size(); j++) {
 					tempset2.add(tempset.get(j));
 				}
@@ -106,10 +107,41 @@ public class LineOfSages {
 		
 		System.out.println(set);
 		System.out.println(checker);
+		System.out.println(visited);
 		
 		/* The strategy starts here.
 		 * 
 		 */
-		checkset(set, checker);
+		
+		while(set.get(cases-1).get(persons-1) < 0) { //repeat until the last entry of the last row is nonnegative
+			int position = 0;
+			while(set.get(position).get(persons-1) >= 0) { //find position, aka the first positive entry
+				position++;
+			}
+			
+			for(int i = 0; i < colors; i++) {
+				if(!visited.get(position).contains(i)) {
+					set.get(position).set(persons-1, i);
+					if(checkset(set, checker)) 
+						break;
+					else
+						set.get(position).set(persons-1, -i-1);
+
+					visited.get(position).add(i);
+				}
+				else if(i == colors - 1) { //backtrack!
+					while(visited.get(position).size() >= persons) {
+						visited.get(position).remove(persons-1);
+					}
+					position--;
+					set.get(position).set(persons-1, -i-1);
+				}
+			}
+			System.out.println(set);
+		}
+		
+		
+		
+		
 	}
 }
