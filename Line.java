@@ -1,10 +1,10 @@
-package bipartite;
+package line;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Main {
+public class Line{
 
 	public static void main(String[] args) {
 		int n = 4, c = 3;
