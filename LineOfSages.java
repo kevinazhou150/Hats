@@ -1,3 +1,5 @@
+//am currently working on this --Kaz
+
 package hats;
 import java.util.ArrayList;
 
