@@ -1,5 +1,3 @@
-//doesn't work completely right now.
-
 package hats;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -122,7 +120,7 @@ public class LineOfSages {
 		
 		int counter1 = 0;
 		outerloop: 
-		while(true) { //repeat until the last entry of the last row is nonnegative
+		while(true) { //repeat until we've visited everything
 			int position = 0;
 			while((set.get(position).get(persons-1) >= 0) && (position < cases-1)) { //find position, aka the first positive entry
 				position++;
@@ -152,7 +150,7 @@ public class LineOfSages {
 				}
 			}
 			
-			/* 
+			/*
 			System.out.println("set: " + set); //remove comment to debug
 			System.out.println("visited: " + visited + "\n");
 			TimeUnit.SECONDS.sleep(1);
@@ -161,6 +159,7 @@ public class LineOfSages {
 			if(checkArrayList(set)) {
 				counter1++;
 				System.out.println("Set " + counter1 + ": " + set);
+				set.get(cases-1).set(persons-1, -position-1);
 			}
 		}
 		
