@@ -1,4 +1,7 @@
 package hats;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -63,9 +66,9 @@ public class LineOfSages {
 	/* main method
 	 * 
 	 */
-	public static void main (String[] args) throws InterruptedException {
-		int persons = 2;
-		int colors = 4;
+	public static void main (String[] args) throws InterruptedException, FileNotFoundException {
+		int persons = 4;
+		int colors = 6;
 		
 		int cases = 1;
 		for(int i = colors; i > 3; i--){ //find P(colors, 4)
@@ -117,6 +120,7 @@ public class LineOfSages {
 		/* The strategy starts here.
 		 * 
 		 */
+		PrintWriter writer = new PrintWriter(new File("sages.txt"));
 		
 		int counter1 = 0;
 		outerloop: 
@@ -158,12 +162,11 @@ public class LineOfSages {
 			
 			if(checkArrayList(set)) {
 				counter1++;
-				System.out.println("Set " + counter1 + ": " + set);
+				writer.println("Set " + counter1 + ": " + set);
 				set.get(cases-1).set(persons-1, -position-1);
 			}
 		}
-		
-		
-		
+
+		writer.close();
 	}
 }
