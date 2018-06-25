@@ -12,8 +12,6 @@ import java.util.concurrent.TimeUnit;
  * That's why I want to avoid that.
  * So, this code tries to find those ordered triples. First, I make 20 ordered pairs (0,1), (0,2), and so on until (4,3).
  * Then I add a number to each ordered pair until it all works out.
- *
- * Also, this code currently only works for line of n+2 sages. I will make small modifications to make it work for n+k.
  */
 
 public class LineOfSages {
@@ -44,7 +42,7 @@ public class LineOfSages {
 						tempset1.add(set.get(j).get(k));
 					}
 				}
-				if(set1.contains(tempset1)) 
+				if(tempset1.get(persons1 - 2) >= 0 && set1.contains(tempset1)) 
 					return false;
 				else 
 					set1.add(tempset1);
