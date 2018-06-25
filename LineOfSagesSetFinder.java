@@ -67,11 +67,11 @@ public class LineOfSages {
 	 * 
 	 */
 	public static void main (String[] args) throws InterruptedException, FileNotFoundException {
-		int persons = 4;
+		int persons = 3;
 		int colors = 6;
 		
 		int cases = 1;
-		for(int i = colors; i > 3; i--){ //find P(colors, 4)
+		for(int i = colors; i > (colors - persons + 1); i--){ //find P(colors, k+2), where there are n persons and n+k colors.
 			cases *= i;
 		}
 		
