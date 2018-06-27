@@ -67,7 +67,7 @@ public class LineOfSages {
 	 * 
 	 */
 	public static void main (String[] args) throws InterruptedException, FileNotFoundException {
-		int persons = 3;
+		int persons = 4;
 		int colors = 6;
 		
 		int cases = 1;
@@ -146,12 +146,17 @@ public class LineOfSages {
 					while(visited.get(position).size() >= persons) {
 						visited.get(position).remove(persons-1);
 					}
+					
+					if(position <= 1 && counter1 >= 1) //Comment out this code to find all sets. This is a shortcut method.
+						break outerloop;
+					
 					if(position > 0) {
 						position--;
 						set.get(position).set(persons-1, -position-1);
 					}
-					else
-						break outerloop;
+					//else //uncomment this code to find all sets.
+						//break outerloop;
+
 				}
 			}
 			
@@ -163,7 +168,7 @@ public class LineOfSages {
 			
 			if(checkArrayList(set)) {
 				counter1++;
-				writer.println("Set " + counter1 + ": " + set);
+				//writer.println("Set " + counter1 + ": " + set);
 				set.get(cases-1).set(persons-1, -position-1);
 				
 				if(counter1 >= Math.pow(10,  milestone)) {
@@ -172,7 +177,8 @@ public class LineOfSages {
 				}
 			}
 		}
-
+		
+		writer.println(counter1 * (colors - persons + 1));
 		writer.close();
 	}
 }
