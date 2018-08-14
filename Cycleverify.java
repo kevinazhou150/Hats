@@ -11,16 +11,16 @@ public class Cycleverify {
 	}
 	
 	public static void main(String[] args) {
-		int people = 6;
+		int people = 6; //insert any multiple of 3 here for success, insert any non-multiple of 3 for failure
 		boolean flag = true;
 		int[][] strategy0 = 
 			   {{1, 2, 1},
 				{2, 2, 0},
 				{1, 0, 0}};
 		int[][] strategyn = 
-			   {{0, 0, 1},
-				{2, 1, 1},
-				{2, 0, 2}};
+			   {{0, 1, 0},
+				{1, 1, 2},
+				{0, 2, 2}};
 		int[][] strategy = 
 			   {{1, 0, 0},
 				{1, 2, 1},
